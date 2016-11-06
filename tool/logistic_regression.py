@@ -24,7 +24,7 @@ def logistic_regression(train_x, train_y, epoch = 100, leaning_rato = 0.01, epsi
             logloss += common.logloss(p, train_y[i])
         delta_theta /= num_sample
         theta -= delta_theta
-        logloss /= -num_sample
+        logloss /= num_sample
         print('epoch[{}/{}]logloss: {}'.format(i + 1, epoch, logloss))
         if logloss < epsilon:
             print('logloss less than threshold {}. stop'.format(epsilon))

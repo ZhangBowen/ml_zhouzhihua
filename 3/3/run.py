@@ -32,5 +32,5 @@ if __name__ == '__main__':
     data = np.loadtxt(data_dir + '/3.0_alpha')
     train_y = data[:,0]
     train_x = np.delete(data, 0, 1)
-    theta = logistic_regression.logistic_regression(train_x, train_y)
+    theta = logistic_regression.logistic_regression(train_x, train_y, 1000, 1)
     print(theta)

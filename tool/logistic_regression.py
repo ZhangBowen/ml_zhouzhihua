@@ -19,9 +19,10 @@ def logistic_regression(train_x, train_y, epoch = 100, leaning_rato = 0.01, epsi
             x_i = train_x[j]
             p = np.dot(x_i, theta)
             h = common.sigmod(p)
-            loss = h - train_y[i]
+            loss = h - train_y[j]
             delta_theta += leaning_rato * (loss * x_i)
-            logloss += common.logloss(p, train_y[i])
+            logloss += common.logloss(h, train_y[j])
+            #print("p:{}, real:{}, logloss:{}".format(h, train_y[j], common.logloss(h, train_y[j])))
         delta_theta /= num_sample
         theta -= delta_theta
         logloss /= num_sample

@@ -1,6 +1,61 @@
 #coding=u8
+
 import math
 import numpy as np
+
+def get_entropy(array_object):
+    '''
+    计算信息熵
+    '''
+    res = 0
+    calc_attr = []
+    total_num = len(array_object)
+    for attr in array_object:
+        if attr in calc_attr:
+            continue
+        else:
+            calc_attr.append(attr)
+            num = len(array_object[array_object == attr])
+            if num == 0:
+                continue
+            probability = float(num) / total_num
+            res += probability * math.log2(probability)
+
+    return -res
+            
+            
+
+def is_same_element(array_object):
+    '''
+    判定该数组是否只含有一种元素
+    '''
+    return len(set(array_object)) == 1
+
+def is_same_dataframe(dataframe):
+    '''
+    判定该dataframe中的所有行的值是否相同
+    '''
+    for name, value in dataframe.iteritems():
+        if not is_same_element(value):
+            return False
+    return True
+
+def majorty_in_array(array_object):
+    '''
+    返回数组中占比多数的值
+    '''
+    count = {}
+    max_value = None
+    max_count = 0
+    for value in array_object:
+        if value not in count:
+            count[value] = 0
+        count[value] += 1
+        if count[value] > max_count:
+            max_count = count[value]
+            max_value = value
+    return max_value
+    
 
 def sigmod(x):
     #range error fix

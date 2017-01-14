@@ -1,10 +1,11 @@
-#!/Users/zhangbowen/bin/python
+#!/usr/bin/env python3
 #coding=u8
 
 import os
 import subprocess
-import numpy as np
 import sys
+import pandas as pd
+import numpy as np
 
 ROOT = os.getcwd() + '/../..'
 
@@ -24,13 +25,15 @@ tool_dir = os.environ['d_tool']
 
 sys.path.append(tool_dir)
 
-import logistic_regression
+import decision_tree
 
 data_dir = os.environ['d_data']
 
 if __name__ == '__main__':
-    data = np.loadtxt(data_dir + '/3.0_alpha')
-    train_y = data[:,0]
-    train_x = np.delete(data, 0, 1)
-    theta = logistic_regression.logistic_regression(train_x, train_y, 500, 1)
-    print(theta)
+    data = pd.read_csv(data_dir + '/3.0')
+    X_set = data.drop(['好瓜'], axis = 1)
+    Y_set = np.array(data['好瓜'])
+    #指定连续属性
+    continuous_attrs = ['密度', '含糖率']
+    tree = decision_tree.Decision_tree_C4_5(X_set, Y_set, continuous_attrs)
+    tree.dump_tree()

@@ -23,6 +23,24 @@ def get_entropy(array_object):
 
     return -res
             
+def get_Gini(array_object):
+    '''
+    计算基尼指数
+    '''
+    res = 0
+    calc_attr = []
+    total_num = len(array_object)
+    for attr in array_object:
+        if attr in calc_attr:
+            continue
+        else:
+            calc_attr.append(attr)
+            num = len(array_object[array_object == attr])
+            probability = float(num) / total_num
+            res += probability ** 2
+
+    return 1 - res
+    
             
 
 def is_same_element(array_object):
@@ -40,7 +58,7 @@ def is_same_dataframe(dataframe):
             return False
     return True
 
-def majorty_in_array(array_object):
+def majority_in_array(array_object):
     '''
     返回数组中占比多数的值
     '''
